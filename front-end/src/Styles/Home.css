@@ -1,0 +1,63 @@
+.home-nav {
+	height: calc(70px + 3vh);
+	background-color: #18181a;
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+}
+
+.home-nav img {
+	height: 50%;
+	margin-left: 30px;
+}
+
+.home-nav .sign-button {
+	width: 150px;
+	border: none;
+	color: white;
+	transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+	height: 40px;
+}
+
+.home-nav .sign-in {
+	background-color: transparent;
+}
+
+.home-nav .sign-up {
+	margin-right: 30px;
+	border-radius: 0.3rem;
+	background: rgb(134, 104, 223);
+}
+
+.home-nav .sign-up:hover {
+	background-color: rgb(124, 94, 213);
+}
+
+.home-nav .sign-in:hover {
+	filter: brightness(0.8);
+	cursor: pointer;
+}
+
+.home {
+	background-image: linear-gradient(to bottom right,
+			#18181a,
+			rgb(30, 30, 30));
+	width: 100vw;
+	height: 100vh;
+	overflow: hidden;
+}
+
+.home .motto {
+	color: white;
+	font-size: 40pt;
+	width: 70%;
+
+	margin-top: 150px;
+	margin-left: 72px;
+
+	font-weight: 400;
+}
+
+span.special {
+	color: rgb(134, 104, 223);
+}

@@ -1,0 +1,188 @@
+.holder {
+	display: flex;
+	flex-direction: row;
+}
+
+
+
+.weather {
+	margin-top: 100px;
+	margin-left: 200px;
+	align-self: flex-start;
+	background: linear-gradient(to top, rgb(124, 124, 212), rgba(143, 123, 222, 0.75));
+	display: flex;
+	color: white;
+	border-radius: 45px;
+	flex-direction: column;
+	width: 375px;
+	height: 195px;
+	padding-bottom: 20px;
+}
+
+@media screen and (max-width: 1350px) {
+	.housing {
+		overflow-x: hidden;
+		flex-direction: column-reverse;
+	}
+
+	.weather {
+		margin-left: 0px;
+		margin-top: 50px;
+		margin-bottom: 50px;
+	}
+
+	.subHolder {
+		margin-bottom: 200px;
+	}
+}
+
+.cityName {
+	margin: 20px;
+	padding: 10px;
+	padding-bottom: 5px;
+	height: 20px;
+	font-weight: 800;
+	font-size: 20px;
+	background: linear-gradient(to left, rgb(111, 216, 245), rgb(177, 161, 240));
+	-webkit-background-clip: text;
+	-webkit-text-fill-color: transparent;
+}
+
+.tempInfo {
+	display: flex;
+	flex-direction: row;
+	margin: 0px;
+	padding: 0px;
+	height: 90px;
+	text-align: center;
+}
+
+.temp {
+	margin-top: 20px;
+	width: 200px;
+	height: 100px;
+	text-align: center;
+	font-size: 50px;
+	font-weight: 600;
+}
+
+.moreInfo {
+	display: flex;
+	flex-direction: column;
+	padding: none;
+	justify-content: space-evenly;
+	align-items: center;
+	background: rgba(180, 186, 186, 0.35);
+	border-radius: 20px;
+	margin-bottom: 10px;
+	width: 90px;
+}
+
+.noLocation {
+	padding-top: 80px;
+	padding-left: 50px;
+	font-size: 25px;
+	margin: 0px;
+}
+
+.minMax {
+	margin-top: 40px;
+	margin-bottom: 10px;
+	width: 200px;
+	height: 100px;
+}
+
+
+.GetUserLocation {
+	width: 500px;
+	margin-top: 25px;
+	display: flex;
+	flex-direction: column;
+	color: rgb(175, 172, 169);
+	background: rgb(44, 44, 44);
+	border-radius: 20px;
+}
+
+.location-form input {
+	box-shadow: none;
+	width: 200px;
+	height: 40px;
+}
+
+.location-form {
+	width: 100px;
+	margin-top: 20px;
+	margin-left: 140px;
+}
+
+.location-form .locationInput {
+	width: 200px;
+	height: 40px;
+	border: 2px solid rgba(0, 0, 0, 0.2);
+}
+
+.weather-label {
+	padding-top: 30px;
+	margin-left: 35px;
+	color: rgb(109, 112, 177);
+	font-size: 28px;
+}
+
+.GetUserLocation button {
+	margin-top: 30px;
+	margin-bottom: 30px;
+	color: white;
+	border-radius: 10px;
+	border: none;
+	font-size: 15px;
+	cursor: pointer;
+	transition: all 0.5s cubic-bezier(0.19, 1, 0.22, 1);
+}
+
+.or {
+	margin-left: 220px;
+	margin-top: 15px;
+	margin-bottom: 15px;
+}
+
+.locationSubmit:hover {
+	background-color: rgb(124, 94, 213);
+}
+
+.GetUserLocation h2 {
+	margin-left: 80px;
+}
+
+.locationSubmit {
+	background: rgb(134, 104, 223);
+	height: 50px;
+	width: 300px;
+	position: relative;
+	left: -40px
+}
+
+.Dummy {
+	margin-left: 140px;
+	width: 200px;
+	height: 40px;
+	background: rgb(72, 58, 83);
+}
+
+.Dummy:hover {
+	background: rgb(57, 43, 66);
+}
+
+.wrong {
+	margin-top: 30px;
+	font-weight: 500;
+	color: red;
+	display: none;
+	transition: all 2s ease;
+	margin-left: 180px;
+}
+
+.disclaimer {
+	margin-top: 30px;
+	margin-left: 110px;
+	margin-bottom: 30px;
+}

@@ -1,0 +1,205 @@
+.event-input {
+	margin-left: 20px;
+	display: flex;
+	flex-direction: column;
+}
+
+.header {
+	font-size: 30px;
+	text-align: center;
+	font-weight: 800;
+	color: rgb(175, 172, 169);
+	padding-left: 190px;
+}
+
+
+
+.event-holder-box {
+	padding-top: 20px;
+	padding-left: 20px;
+	padding-right: 50px;
+	border-radius: 20px;
+	width: 450px;
+	background: rgb(44, 44, 44);
+	height: 670px;
+	margin-bottom: 200px;
+}
+
+.event.times {
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+}
+
+.event.timings {
+	border-radius: 10px;
+	width: 400px;
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+}
+
+.event.timings label {
+	margin-top: 30px;
+	margin-right: 10px;
+	margin-left: 20px;
+}
+
+.event.timings #startTime {
+	border-radius: 10px;
+	margin-top: 20px;
+	width: 145px;
+}
+
+.event.duration {
+	margin-top: 20px;
+	display: flex;
+	flex-direction: row;
+	text-align: center;
+	justify-content: space-between;
+}
+
+.event.duration input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+	-webkit-appearance: none;
+	margin: 0;
+}
+
+.event.duration input[type="number"] {
+	-moz-appearance: textfield;
+}
+
+.event.name {
+	margin-top: 40px;
+	padding: 1px;
+	width: 430px;
+	padding-left: 10px;
+	border-radius: 10px;
+}
+
+.event.duration #duration-hours {
+	margin-top: 0px;
+	width: 45px;
+	border-radius: 10px;
+	margin-right: 5px;
+}
+
+.react-datepicker {
+	border: none;
+}
+
+
+.react-datepicker__popper {
+	border: none;
+}
+
+.react-datepicker__month-container {
+	background: rgb(46, 46, 46);
+	color: white;
+	border: none;
+	border-radius: 10px;
+}
+
+.react-datepicker__header {
+	background: rgb(34, 33, 33);
+}
+
+.react-datepicker__current-month,
+.react-datepicker__day-name,
+.react-datepicker__day {
+	color: white;
+}
+
+
+.react-datepicker__day:hover {
+	background: rgb(61, 60, 60);
+}
+
+.event.duration #duration-minutes {
+	border-radius: 10px;
+	margin-top: 0px;
+	width: 52px;
+	margin-left: 5px;
+}
+
+.event-input input {
+	border: 1px solid rgba(10, 10, 10, 0.2);
+	border-radius: 10px;
+	width: 375px;
+	border-radius: 0px;
+}
+
+.event.details {
+	border: 1px solid rgba(0, 0, 0, 0.2);
+	/* box-shadow: 0px 2px 40px 3px rgb(199, 194, 194); */
+	resize: none;
+	padding: 7px;
+	padding-left: 10px;
+	border-radius: 10px;
+	font-size: 15px;
+	width: 425px;
+	height: 225px;
+}
+
+.event-input .submitButton {
+	width: 200px;
+	font-size: 1em;
+	border: none;
+	border-radius: 10px;
+	height: 45px;
+	background: rgb(134, 104, 223);
+	color: white;
+	margin-left: 100px;
+	cursor: pointer;
+	margin-top: 20px;
+	/* box-shadow: 0px 5px 20px 5px rgb(196, 147, 221); */
+	transition: all 0.5s cubic-bezier(0.19, 1, 0.22, 1);
+}
+
+
+.event-input label {
+	margin-top: 40px;
+	margin-left: 40px;
+	color: white;
+}
+
+.event-input .submitButton:hover {
+	background-color: rgb(124, 94, 213);
+}
+
+.invalidData {
+	font-weight: 500;
+	margin-left: 130px;
+	color: red;
+	display: none;
+	transition: all 2s ease;
+}
+
+.event-holder-box input,
+select,
+textarea {
+	border-radius: 10px;
+	color: white;
+	outline: none;
+	background: rgb(53, 52, 52);
+	/* box-shadow: 0px 2px 40px 3px rgb(69, 68, 68); */
+	box-shadow: none;
+}
+
+.event-holder-box .datePicker {
+	width: 100px;
+	text-align: center;
+}
+
+.selectDate-holder label {
+	padding-top: 15px;
+	margin: 0;
+	width: 140px;
+	display: inline;
+}
+
+.selectDate-holder {
+	margin-top: 20px;
+	display: flex;
+	flex-direction: row;
+}
