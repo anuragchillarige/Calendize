@@ -17,8 +17,19 @@ import EventsHolder from './Components/EventsHolder';
 import { logout } from './firebase';
 
 const Main = () => {
-  const startTimer = () => (hideElements = setInterval(func, 3000));
+  const startTimer = () => (hideElements = setInterval(hideMouse, 3000));
   const [img, setImg] = useState('');
+  let index = 0;
+  let images: any[] = [];
+
+  useEffect(() => {
+    images = importAll(
+      require.context('./Images', false, /\.(png|jpe?g|svg)$/)
+    );
+    images = images.splice(0, images.length / 2);
+    setImg(images[0].substring(2));
+    console.log(images);
+  }, []);
 
   function importAll(r) {
     let images: any[] = [];
@@ -29,14 +40,7 @@ const Main = () => {
     return images;
   }
 
-  useEffect(() => {
-    const images = importAll(
-      require.context('./Images', false, /\.(png|jpe?g|svg)$/)
-    );
-    setImg(images[0].substring(2));
-    console.log(img);
-  }, []);
-  const func = () => {
+  const hideMouse = () => {
     const getMouseCoords = () => {
       let body = document.querySelector('body');
       if (body !== null) body.style.cursor = 'auto';
@@ -74,7 +78,18 @@ const Main = () => {
     document.onmousemove = getMouseCoords;
   };
 
-  let hideElements = setInterval(func, 3000);
+  const changeImage = () => {
+    console.log(index);
+    if (index === images.length) {
+      index = 0;
+    }
+
+    if (index < images.length) setImg(images[index].substring(2));
+    index++;
+  };
+
+  let hideElements = setInterval(hideMouse, 3000);
+  let chngImg = setInterval(changeImage, 1000 * 60);
 
   return (
     <div className="component-holder">
