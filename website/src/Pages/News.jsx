@@ -10,8 +10,8 @@ function News() {
 
     useEffect(() => {
         //length
-    }, [rssArr])
-    function submitData(e) {
+    }, [])
+    async function submitData(e) {
 
         try {
             const q = query(
