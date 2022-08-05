@@ -6,21 +6,24 @@ import { doc, setDoc, updateDoc, collection, where, query, getDocs } from "fireb
 function News() {
     const [currUser] = useAuthState(auth)
     const [link, setLink] = useState("")
-    console.log(link)
+    const [rrsArr, setRssArr] = useState([])
 
+    useEffect(() => {
+        //length
+    }, [rssArr])
     function submitData(e) {
-        // const linkObject = {
-        //     link: link
-        // }
-        // try {
-        //     const q = query(
-        //         collection(db, 'users'),
-        //         where('uid', '==', currUser?.uid)
-        //     );
-        //     const userDoc = await getDocs(q);
-        //     const docID = userDoc.docs[0].id;
 
-        // }
+        try {
+            const q = query(
+                collection(db, 'users'),
+                where('uid', '==', currUser?.uid)
+            );
+            const userDoc = await getDocs(q);
+            setRssArr(userDoc.docs[0].rssLinkNews);
+        }
+        catch (err) {
+            alert("Could not load user's docs")
+        }
     }
 
     return (

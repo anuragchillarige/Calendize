@@ -48,6 +48,7 @@ const register = async (name, email, password) => {
 			authProvider: "local",
 			email,
 			location: "None",
+			rssLinksNews: ['', '', '', '', '']
 		});
 	} catch (err) {
 		console.log(err);
