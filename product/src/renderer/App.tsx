@@ -1,9 +1,4 @@
-import {
-  MemoryRouter as Router,
-  Routes,
-  Route,
-  useSearchParams,
-} from 'react-router-dom';
+import { MemoryRouter as Router, Routes, Route } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import './App.css';
 
@@ -31,9 +26,9 @@ const Main = () => {
     console.log(images);
   }, []);
 
-  function importAll(r) {
+  function importAll(r: __WebpackModuleApi.RequireContext) {
     let images: any[] = [];
-    r.keys().map((item, index) => {
+    r.keys().map((item: any) => {
       images.push(item);
     });
 
