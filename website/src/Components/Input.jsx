@@ -6,6 +6,7 @@ import '../Styles/EventInput.css'
 import { useAuthState } from 'react-firebase-hooks/auth';
 import { auth, db } from '../firebase';
 import { collection, where, query, getDocs, addDoc } from "firebase/firestore";
+import { reload } from "firebase/auth";
 
 
 export default function Input() {
@@ -39,6 +40,7 @@ export default function Input() {
             valid = false;
         }
 
+
         if (today > day) {
             valid = false;
         }
@@ -54,13 +56,41 @@ export default function Input() {
                 if (hrs !== 12) hrs += 12;
                 milTime = hrs + ":" + startTime.substring(startTime.indexOf(":") + 1, startTime.indexOf(" "));
             }
+
+            let end = today;
+            let nextDay = false;
+            let endTime = (parseInt(milTime.substring(0, milTime.indexOf(":"))) + parseInt(duration.hours)) + ":" +
+                (parseInt(milTime.substring(milTime.indexOf(":") + 1)) + parseInt(duration.mins))
+
+            if (parseInt(endTime.substring(endTime.indexOf(":") + 1)) >= 60) {
+                endTime = (parseInt(endTime.substring(0, endTime.indexOf(":"))) + 1) + ":" + (parseInt(endTime.substring(endTime.indexOf(":") + 1)) - 60)
+            }
+
+            if (parseInt(endTime.substring(0, endTime.indexOf(":"))) >= 24) {
+                endTime = (parseInt(endTime.substring(0, endTime.indexOf(":"))) - 24) + ":" + endTime.substring(endTime.indexOf(":") + 1)
+                nextDay = true;
+            }
+
+            console.log(endTime)
+
+            if (nextDay) {
+                end.setDate(end.getDate() + 1);
+            }
+
+            end.setHours(parseInt(endTime.substring(0, endTime.indexOf(":"))))
+            end.setMinutes(parseInt(endTime.substring(endTime.indexOf(":") + 1)))
+            end.setSeconds(0)
+
+            console.log(end)
+
             // submit form 
             const eventObject = {
                 name: name,
                 details: details,
                 day: day,
                 start_time: milTime,
-                duration: duration
+                duration: duration,
+                end: end
             }
 
             eventObject.day.setHours(milTime.substring(0, milTime.indexOf(":")).trim())
@@ -184,11 +214,6 @@ export default function Input() {
         e.target.style.border = "1px solid rgba(0, 0, 0, 0.2)";
     }
 
-    let lim = new Date();
-    lim.setFullYear(2150)
-    lim.setMonth(11)
-    lim.setDate(31)
-
 
     return (
         <div className="event-holder-box">
@@ -199,7 +224,6 @@ export default function Input() {
                 <input type="text" onChange={e => { e.preventDefault(); setName(e.target.value); setDefaultBorder(e) }} className="event name" id="eventName" placeholder="Title" />
                 <textarea className="event details" onChange={e => { e.preventDefault(); setDetails(e.target.value); setDefaultBorder(e) }} placeholder="Details"></textarea>
 
-                {/* <SelectDatepicker selectedDate={day} onDateChange={onDateChange} className="event date" /> */}
                 <div className="selectDate-holder">
                     <label>Select Date:</label>
                     <DatePicker selected={day} onChange={day => {
@@ -226,6 +250,4 @@ export default function Input() {
         </div>
 
     )
-
-
 }

@@ -44,7 +44,7 @@ export default function EventsHolder() {
                     querySnapshot.forEach(async (event) => {
                         let data = event.data();
 
-                        eventsArr.push({ user: user, name: data.name, details: data.details, day: data.day.toDate(), start_time: data.start_time, duration: data.duration, docID: event.id })
+                        eventsArr.push({ user: user, name: data.name, details: data.details, day: data.day.toDate(), start_time: data.start_time, duration: data.duration, docID: event.id, end: data.end.toDate() })
 
                     })
                     setEvents(eventsArr)

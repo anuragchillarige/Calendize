@@ -4,27 +4,66 @@ import './App.css';
 
 import Weather from './Components/Weather';
 // import Time from './Components/Time';
+import {
+  collection,
+  doc,
+  where,
+  query,
+  onSnapshot,
+  getDocs,
+} from 'firebase/firestore';
 
 import Sign from './Components/SignIn';
 import Register from './Components/Register';
 import Reset from './Components/Reset';
 import EventsHolder from './Components/EventsHolder';
-import { logout } from './firebase';
+import { logout, auth, db } from './firebase';
+import { useAuthState } from 'react-firebase-hooks/auth';
+import { json } from 'stream/consumers';
 
 const Main = () => {
   const startTimer = () => (hideElements = setInterval(hideMouse, 3000));
   const [img, setImg] = useState('');
   let index = 0;
   let images: any[] = [];
+  const [user, setUser] = useState('');
+  const [currUser, loading] = useAuthState(auth);
 
-  useEffect(() => {
+  async function getUser() {
+    if (currUser == null) {
+      return;
+    }
+    try {
+      const q = query(
+        collection(db, 'users'),
+        where('uid', '==', currUser?.uid)
+      );
+      const userDoc = await getDocs(q);
+      const userID = userDoc.docs[0].id;
+
+      setUser(userID);
+    } catch (err) {
+      console.log(err);
+      alert('An error had occurred while fetching the users name');
+      return;
+    }
+  }
+
+  async function loadCalendar() {
+    await getUser();
+    if (user !== '') {
+      fetch('http://127.0.0.1:5000/addCalendar', {
+        method: 'POST',
+        body: JSON.stringify({ user }),
+        mode: 'no-cors',
+      });
+    }
     images = importAll(
       require.context('./Images', false, /\.(png|jpe?g|svg)$/)
     );
     images = images.splice(0, images.length / 2);
     setImg(images[0].substring(2));
-    console.log(images);
-  }, []);
+  }
 
   function importAll(r: __WebpackModuleApi.RequireContext) {
     let images: any[] = [];
@@ -53,7 +92,6 @@ const Main = () => {
 
     btn?.addEventListener('mouseover', () => {
       onBtn = true;
-      console.log('dfd');
       clearInterval(hideElements);
     });
 
@@ -74,7 +112,6 @@ const Main = () => {
   };
 
   const changeImage = () => {
-    console.log(index);
     if (index === images.length) {
       index = 0;
     }
@@ -82,6 +119,10 @@ const Main = () => {
     if (index < images.length) setImg(images[index].substring(2));
     index++;
   };
+
+  useEffect(() => {
+    loadCalendar();
+  }, [currUser, user]);
 
   let hideElements = setInterval(hideMouse, 3000);
   let chngImg = setInterval(changeImage, 1000 * 60);
