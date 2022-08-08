@@ -6,6 +6,7 @@ import { useEffect } from "react";
 export default function Event(props) {
 
     const del = async (id) => {
+        console.log("getting deleted")
         await deleteDoc(doc(db, "users", props.event.user, "events", id));
     }
 
@@ -30,7 +31,7 @@ export default function Event(props) {
     useEffect(() => {
         setInterval(async () => {
             const today = new Date();
-            if (today > props.event.day) {
+            if (today > props.event.end) {
                 await del(props.event.docID);
             }
         }, 1000)

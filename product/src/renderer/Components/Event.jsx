@@ -16,7 +16,6 @@ export default function Event(props) {
             const today = new Date();
             if (today > props.event.day) {
                 await del(props.event.docID);
-                console.log("sdljksd")
             }
         }, 1000)
     }, [])
