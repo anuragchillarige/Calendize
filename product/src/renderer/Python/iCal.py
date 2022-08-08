@@ -45,7 +45,9 @@ def addToDB(url, docID):
             "end": end
         }
 
-        db.collection("users").document(docID).collection("events").document(f'iCal {name} ON {start} AT {start_time}').set(data)
+        db.collection("users").document(docID).collection("events").document(
+            f'iCal {name} ON {start} AT {start_time}').set(data)
+
 
 def addCalendars(docID):
     # urls = ['https://calendar.google.com/calendar/ical/pinganurag%40gmail.com/private-8d6688faf4d85816c9e261705bc60fdf/basic.ics']
