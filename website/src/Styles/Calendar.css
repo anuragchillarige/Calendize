@@ -28,3 +28,7 @@
 	cursor: pointer;
 	background-color: rgb(124, 94, 213);
 }
+
+.links-holder p {
+	color: red;
+}
