@@ -1,0 +1,87 @@
+.rssPage-holder {
+    display: flex;
+    flex-direction: row;
+    background: transparent;
+}
+
+@media screen and (max-width:1100px) {
+    .rssPage-holder {
+        flex-direction: column-reverse;
+    }
+}
+
+.link-holder {
+    background: red;
+}
+
+.link-submit-holder {
+    margin-top: 80px;
+    background: white;
+    width: 500px;
+    height: 300px;
+    justify-content: center;
+    border-radius: 40px;
+    margin-left: 6vw;
+    /* border: 0.1px dashed black; */
+    box-shadow: 4px 1px 40px 2px rgb(197, 189, 189);
+}
+
+.link-submit-holder form {
+    display: flex;
+    flex-direction: column;
+}
+
+.rssLinkTitle {
+    margin-top: 55px;
+    margin-bottom: 30px;
+    font-size: 30px;
+    text-align: center;
+    font-weight: 800;
+    color: rgb(13, 13, 12);
+}
+
+.link-submit-holder input {
+    margin-left: 85px;
+    background: rgb(238, 237, 237);
+    color: rgb(8, 8, 8);
+    width: 300px;
+    box-shadow: none;
+    outline: none;
+    margin-bottom: 30px;
+}
+
+/* .rss-submit {
+    width: 270px;
+    height: 45px;
+    margin-left: 115px;
+    font-size: 15px;
+    border: none;
+    color: rgb(235, 240, 243);
+    background: linear-gradient(to right, rgb(103, 35, 170), rgb(199, 111, 234));
+    border-radius: 15px;
+    cursor: pointer;
+}
+
+.rss-submit:hover {
+    transition: 0.3s;
+    background: linear-gradient(to right, rgb(88, 21, 154), rgb(170, 72, 209));
+} */
+
+.rss-submit {
+
+    width: 270px;
+    height: 45px;
+    margin-left: 115px;
+    font-size: 15px;
+    border: none;
+    color: rgb(235, 240, 243);
+    background: linear-gradient(to right, rgb(103, 35, 170), rgb(199, 111, 234));
+    border-radius: 15px;
+    transition: all 2s;
+    cursor: pointer;
+    position: relative;
+}
+
+.rss-submit:hover {
+    background: linear-gradient(to right, rgb(92, 31, 153), rgb(160, 89, 188));
+}

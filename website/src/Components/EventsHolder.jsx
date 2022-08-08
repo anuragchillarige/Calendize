@@ -26,8 +26,6 @@ export default function EventsHolder() {
                 const userDoc = await getDocs(q);
                 // return userDoc.docs[0].id;
                 setUser(userDoc.docs[0].id)
-
-
             } catch (err) {
                 return;
             }

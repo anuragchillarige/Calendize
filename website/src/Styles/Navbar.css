@@ -11,7 +11,7 @@
     font-size: 20px;
     padding-left: 2vw;
     padding-right: 2vw;
-    background: #212123;
+    background: white;
     display: flex;
     flex-direction: row;
     position: relative;
@@ -20,7 +20,7 @@
 .name {
     padding-top: 10px;
     background: transparent;
-    color: white;
+    color: black;
 }
 
 .name span {
@@ -45,7 +45,7 @@
 }
 
 .page {
-    color: white;
+    color: black;
     padding-top: 10px;
     position: absolute;
     left: 45%;
@@ -130,7 +130,7 @@
     background: #5c52edd7;
     margin-top: 20px;
     margin-bottom: 10px;
-    color: white;
+    color: black;
     margin-left: 10%;
     width: 80%;
     text-align: center;
