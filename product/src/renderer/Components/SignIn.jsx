@@ -16,7 +16,7 @@ function SignIn() {
       // future implementation of loading screen
       return;
     }
-    if (currUser) nav('/dash');
+    if (currUser) nav('/disp');
   }, [currUser, loading]);
 
   return (

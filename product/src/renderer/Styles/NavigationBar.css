@@ -1,0 +1,104 @@
+.bi.bi-list {
+  color: rgb(213, 204, 204);
+  font-size: 35px;
+  background: rgba(0, 0, 0, 0.589);
+  padding: 6px;
+  padding-top: 3px;
+  padding-bottom: 3px;
+  border-radius: 10px;
+  cursor: pointer;
+}
+
+.bi.bi-list:hover {
+  background: rgba(55, 54, 54, 0.589);
+}
+
+
+
+.navbar-container {
+  padding-top: 7px;
+  height: 45px;
+  display: flex;
+  position: relative;
+  width: 100vw;
+  left: 95vw;
+  z-index: 8;
+}
+
+
+.menuNav {
+  display: flex;
+  flex-direction: row;
+  background: white;
+  position: absolute;
+  width: 100vw;
+  z-index: 100;
+  height: 60px;
+  transform: translateY(-50px);
+  transition: all 0.2s ease;
+}
+
+
+.close-holder {
+  padding-top: 15px;
+  text-align: right;
+  padding-right: 40px;
+}
+
+.bi.bi-x-lg {
+  padding: 7px;
+  color: rgb(130, 128, 128);
+  padding-top: 4px;
+  padding-bottom: 4px;
+  border-radius: 10px;
+  font-size: 25px;
+  background: rgb(234, 237, 249);
+}
+
+.bi.bi-x-lg:hover {
+  background: rgb(219, 223, 240);
+}
+
+.menuNav.showMenu {
+  background: white;
+  transform: translateY(0px);
+}
+
+.menuNav.closeMenu {
+  background: white;
+  height: 0%;
+}
+
+.menuNav button {
+  border: none;
+  background: transparent;
+  cursor: pointer;
+}
+
+.button-holder {
+  width: 100%;
+  text-align: center;
+  display: flex;
+  flex-direction: row;
+  text-align: center;
+  justify-content: center;
+}
+
+.button-holder button {
+  height: 50px;
+  padding-top: 15px;
+  text-align: center;
+  font-size: 20px;
+  color: gray;
+  margin-left: 30px;
+  /* border-bottom: 4px solid rgb(121, 25, 159); */
+  display: flex;
+}
+
+.button-holder.disp {
+  border-bottom: 4px solid rgb(121, 25, 159);
+}
+
+.button-holder button:hover {
+  color: rgb(0, 0, 0);
+}

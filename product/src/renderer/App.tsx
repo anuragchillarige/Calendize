@@ -1,7 +1,7 @@
 import { MemoryRouter as Router, Routes, Route } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import './App.css';
-
+import "bootstrap-icons/font/bootstrap-icons.css";
 import Weather from './Components/Weather';
 // import Time from './Components/Time';
 import {
@@ -17,12 +17,14 @@ import Sign from './Components/SignIn';
 import Register from './Components/Register';
 import Reset from './Components/Reset';
 import EventsHolder from './Components/EventsHolder';
+import NavigationBar from './Components/NavigationBar';
 import { logout, auth, db } from './firebase';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import { json } from 'stream/consumers';
+import Ics from './Components/Ics'
 
 const Main = () => {
-  const startTimer = () => (hideElements = setInterval(hideMouse, 3000));
+  // const startTimer = () => (hideElements = setInterval(hideMouse, 3000));
   const [img, setImg] = useState('');
   let index = 0;
   let images: any[] = [];
@@ -58,6 +60,7 @@ const Main = () => {
         mode: 'no-cors',
       });
     }
+
     images = importAll(
       require.context('./Images', false, /\.(png|jpe?g|svg)$/)
     );
@@ -92,11 +95,11 @@ const Main = () => {
 
     btn?.addEventListener('mouseover', () => {
       onBtn = true;
-      clearInterval(hideElements);
+      // clearInterval(hideElements);
     });
 
     btn?.addEventListener('mouseout', () => {
-      startTimer();
+      // startTimer();
     });
 
     if (body !== null) body.style.cursor = onBtn ? 'auto' : 'none';
@@ -124,11 +127,12 @@ const Main = () => {
     loadCalendar();
   }, [currUser, user]);
 
-  let hideElements = setInterval(hideMouse, 3000);
-  let chngImg = setInterval(changeImage, 1000 * 60);
+  // let hideElements = setInterval(hideMouse, 3000);
+  let chngImg = setInterval(changeImage, 1000 * 10);
 
   return (
     <div className="component-holder">
+      <NavigationBar />
       {img !== '' ? (
         <img
           className="bg-image"
@@ -139,8 +143,7 @@ const Main = () => {
       ) : (
         <></>
       )}
-
-      <button
+      {/* <button
         className="sign-out-button"
         onClick={() => {
           logout();
@@ -148,7 +151,7 @@ const Main = () => {
         }}
       >
         Sign Out
-      </button>
+      </button> */}
       <Weather />
       <EventsHolder />
     </div>
@@ -157,12 +160,14 @@ const Main = () => {
 
 export default function App() {
   return (
+
     <Router>
       <Routes>
         <Route path="/" element={<Sign />} />;
-        <Route path="/dash" element={<Main />} />;
+        <Route path="/disp" element={<Main />} />;
         <Route path="/register" element={<Register />} />
         <Route path="/reset" element={<Reset />} />
+        <Route path="/ics" element={<Ics />} />
       </Routes>
     </Router>
   );

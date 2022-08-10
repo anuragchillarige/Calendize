@@ -20,7 +20,7 @@ body {
 }
 
 .hideCursor {
-  cursor: none;
+  /* cursor: none; */
 }
 
 .component-holder {
@@ -42,7 +42,7 @@ body {
   border-radius: 0.3rem;
   width: 100px;
   height: 25px;
-  transform: translateY(-25px);
+  /* transform: translateY(-25px); */
 
   transition: all 0.2s cubic-bezier(0.075, 0.82, 0.165, 1);
 }
