@@ -1,11 +1,14 @@
 // this file is for each individual event
 import { deleteDoc, doc } from "firebase/firestore";
 import { db } from "../firebase";
-import { useEffect } from "react";
 
 export default function Event(props) {
 
+    let delInterval = setInterval(() => { }, 1000);
+
+
     const del = async (id) => {
+        clearInterval(delInterval)
         console.log("getting deleted")
         await deleteDoc(doc(db, "users", props.event.user, "events", id));
     }
@@ -28,14 +31,15 @@ export default function Event(props) {
         return hr + ":" + min + " am";
     }
 
-    useEffect(() => {
-        setInterval(async () => {
-            const today = new Date();
-            if (today > props.event.end) {
-                await del(props.event.docID);
-            }
-        }, 1000)
-    }, [])
+    let deleted = false
+    delInterval = setInterval(async () => {
+        const today = new Date();
+        if (deleted === false && today > props.event.end) {
+            console.log(deleted + " " + props.event.name)
+            await del(props.event.docID);
+            deleted = true;
+        }
+    }, 2000)
 
     return (
         <div className="event-holder-card">

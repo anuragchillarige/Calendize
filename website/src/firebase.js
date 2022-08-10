@@ -22,7 +22,7 @@ const firebaseConfig = {
 	storageBucket: "calendize-956a9.appspot.com",
 	messagingSenderId: "994073634703",
 	appId: "1:994073634703:web:36715d7dabd3dbb50b0dfa",
-	measurementId: "G-0VS982MSYM"
+	measurementId: "G-0VS982MSYM",
 };
 
 const app = initializeApp(firebaseConfig);

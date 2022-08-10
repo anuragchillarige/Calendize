@@ -1,5 +1,5 @@
 from crypt import methods
-from flask import Flask, request
+from flask import Flask, request, render_template
 import Utilities
 import json
 import iCal
@@ -26,6 +26,10 @@ def getLink():
 def addCalendar():
     output = json.loads(request.data)
     return iCal.addCalendars(output['user'])
+
+@app.route('/')
+def home():
+    return render_template('index.html')
 
 
 if __name__ == "__main__":
