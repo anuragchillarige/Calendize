@@ -3,10 +3,12 @@ import '../Styles/Home.css'
 import { useNavigate } from 'react-router-dom';
 import { logout } from "../firebase";
 import TypeAnimation from 'react-type-animation';
+import React from 'react';
+
 
 export default function Home() {
-
     const nav = useNavigate();
+
 
     return (
         <div className="home">

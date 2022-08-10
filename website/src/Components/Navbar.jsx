@@ -35,7 +35,6 @@ function Navbar(props) {
     };
 
     const navigate = (direction) => {
-        console.log("/" + direction)
         nav("/" + direction);
         closeMenu();
         return;

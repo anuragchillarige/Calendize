@@ -66,6 +66,7 @@ export default function Location() {
             navigator.geolocation.getCurrentPosition(getLoc)
         } else {
             setLoc("None");
+            console.log("sfs")
         }
     }
 

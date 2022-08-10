@@ -15,14 +15,15 @@
 
 
 .event-holder-box {
+	box-shadow: 4px 1px 40px 2px rgb(197, 189, 189);
 	padding-top: 20px;
 	padding-left: 20px;
 	padding-right: 50px;
-	border-radius: 20px;
+	border-radius: 60px;
 	width: 450px;
-	background: rgb(44, 44, 44);
+	background: white;
 	height: 670px;
-	margin-bottom: 200px;
+	margin-bottom: 80px;
 }
 
 .event.times {
@@ -94,21 +95,19 @@ input::-webkit-inner-spin-button {
 }
 
 .react-datepicker__month-container {
-	background: rgb(46, 46, 46);
-	color: white;
 	border: none;
 	border-radius: 10px;
 }
 
-.react-datepicker__header {
+/* .react-datepicker__header {
 	background: rgb(34, 33, 33);
-}
-
+} */
+/* 
 .react-datepicker__current-month,
 .react-datepicker__day-name,
 .react-datepicker__day {
 	color: white;
-}
+} */
 
 
 .react-datepicker__day:hover {
@@ -123,14 +122,12 @@ input::-webkit-inner-spin-button {
 }
 
 .event-input input {
-	border: 1px solid rgba(10, 10, 10, 0.2);
 	border-radius: 10px;
 	width: 375px;
 	border-radius: 0px;
 }
 
 .event.details {
-	border: 1px solid rgba(0, 0, 0, 0.2);
 	/* box-shadow: 0px 2px 40px 3px rgb(199, 194, 194); */
 	resize: none;
 	padding: 7px;
@@ -147,7 +144,7 @@ input::-webkit-inner-spin-button {
 	border: none;
 	border-radius: 10px;
 	height: 45px;
-	background: rgb(134, 104, 223);
+	background: linear-gradient(to right, rgb(103, 35, 170), rgb(199, 111, 234));
 	color: white;
 	margin-left: 100px;
 	cursor: pointer;
@@ -156,6 +153,9 @@ input::-webkit-inner-spin-button {
 	transition: all 0.5s cubic-bezier(0.19, 1, 0.22, 1);
 }
 
+.event-input .submitButton:hover {
+	background: linear-gradient(to right, rgb(92, 31, 153), rgb(160, 89, 188));
+}
 
 .event-input label {
 	margin-top: 40px;
@@ -179,15 +179,18 @@ input::-webkit-inner-spin-button {
 select,
 textarea {
 	border-radius: 10px;
-	color: white;
+	color: rgb(0, 0, 0);
 	outline: none;
-	background: rgb(53, 52, 52);
+	border: 0px;
+	background: rgb(239, 240, 240);
 	/* box-shadow: 0px 2px 40px 3px rgb(69, 68, 68); */
 	box-shadow: none;
 }
 
 .event-holder-box .datePicker {
 	width: 100px;
+	margin-left: 40px;
+	align-self: center;
 	text-align: center;
 }
 

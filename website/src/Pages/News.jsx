@@ -26,7 +26,7 @@ function News() {
                 const data = userDoc.docs[0].data();
                 const userID = userDoc.docs[0].id;
                 setUser(userID)
-                let temp = data.rssLink;
+                let temp = data.rssLinks;
                 setRssArr(temp);
                 console.log(temp)
             }
@@ -54,11 +54,13 @@ function News() {
                     setRssArr(arr)
                     setArrChange(!arrChange)
                     await updateDoc(doc(db, "users", userDoc.docs[0].id), {
-                        rssLink: arr
+                        rssLinks: arr
                     });
+                    setLink("")
                     linkInput.current.value = ''
                 }
                 else {
+                    setLink("")
                     alert("Only 5 Rss Links allowed")
                     linkInput.current.value = ''
                 }
@@ -75,7 +77,7 @@ function News() {
         let newArr = [...rssArr]
 
         newArr.splice(index, 1)
-        await updateDoc(doc(db, 'users', user), { rssLink: newArr })
+        await updateDoc(doc(db, 'users', user), { rssLinks: newArr })
         setArrChange(!arrChange)
     }
 
@@ -96,16 +98,14 @@ function News() {
 
 
                 <div className="outside">
-                    <div className="rss-link-header">
-                        <h1>
-                            RSS Header
-                        </h1>
+                    <div className="temp-div">
+                        RSS Links
                     </div>
                     <div className="rss-housing">
                         {rssArr.map((link, index) =>
                             <div className="link-holder" key={index}>
                                 <h3>{link}</h3>
-                                <button onClick={() => deleteEvent(index)}>click</button>
+                                <i onClick={() => deleteEvent(index)} class="bi bi-trash3"></i>
                             </div>)}
                     </div>
                 </div>

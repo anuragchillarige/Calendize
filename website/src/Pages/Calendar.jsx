@@ -1,6 +1,6 @@
 import { useRef } from "react";
 import Navbar from "../Components/Navbar";
-import '../Styles/Calendar.css'
+import '../Styles/News.css'
 import { db, auth } from "../firebase";
 import { query, collection, getDocs, where, updateDoc, doc, onSnapshot } from 'firebase/firestore';
 import { useAuthState } from "react-firebase-hooks/auth";
@@ -79,23 +79,44 @@ export default function Calendar() {
     return (
         <div>
             <Navbar title="Calendar" />
-            <div className="calendar-holder">
-                <h1>Import Calendar</h1>
-                <form onSubmit={(e) => { e.preventDefault(); submit() }}>
-                    <h3>Import events from another calendar using an iCal Link</h3>
-                    <input type="text" ref={link} placeholder="iCal link" />
-                    <button type="submit">Submit</button>
-                </form>
-                <div className="links-holder">
-                    {links.map((value, index) => <p onClick={async () => {
-                        console.log(index)
-                        let newArr = [...links]
-                        newArr.splice(index, 1)
-                        await setLinks(newArr)
-                        await updateDoc(doc(db, 'users', user), { iCalLinks: newArr })
-                    }}>{value}</p>)}
+
+
+            <div className="rssPage-holder">
+                <div className="link-submit-holder">
+                    <form onSubmit={(e) => { e.preventDefault(); submit() }}>
+                        <h1 className="rssLinkTitle">Import iCal Links
+                            <h3>Import events from another calendar using an iCal Link
+                            </h3>
+                        </h1>
+
+                        <input className="input-rss" type="url" ref={link} placeholder="iCal link" />
+                        <button className="rss-submit" type="submit">Submit</button>
+                    </form>
                 </div>
+
+                <div className="outside">
+                    <div className="temp-div">
+                        iCal Links
+                    </div>
+
+                    <div className="rss-housing">
+                        {links.map((value, index) =>
+                            <div className="link-holder" key={index}>
+                                <h3>{value}</h3>
+                                <i class="bi bi-trash3" onClick={async () => {
+                                    let newArr = [...links]
+                                    newArr.splice(index, 1)
+                                    await setLinks(newArr)
+                                    await updateDoc(doc(db, 'users', user), { iCalLinks: newArr })
+                                }}></i>
+                            </div>)}
+                    </div>
+                </div>
+
             </div>
+
+
+
         </div>
 
 
