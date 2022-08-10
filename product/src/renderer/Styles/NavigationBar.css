@@ -34,7 +34,7 @@
   width: 100vw;
   z-index: 100;
   height: 60px;
-  transform: translateY(-50px);
+  transform: translateY(-100px);
   transition: all 0.2s ease;
 }
 
@@ -61,6 +61,7 @@
 
 .menuNav.showMenu {
   background: white;
+  top: 0px;
   transform: translateY(0px);
 }
 

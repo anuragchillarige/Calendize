@@ -132,7 +132,7 @@ const Main = () => {
 
   return (
     <div className="component-holder">
-      <NavigationBar />
+      <NavigationBar text={"disp"} />
       {img !== '' ? (
         <img
           className="bg-image"

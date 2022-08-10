@@ -4,9 +4,13 @@ import '../Styles/NavigationBar.css'
 import { logout } from '../firebase';
 import { dir } from 'console';
 
-function NavigationBar() {
+function NavigationBar(props) {
   const [navbarOpen, setNavbarOpen] = useState(false);
   const nav = useNavigate();
+  if (props.text != null) {
+    const underline = document.querySelector("." + props.text);
+    underline.style.borderBottom = "4px solid rgb(121, 25, 159)"
+  }
   const navigate = (direction) => {
     // let underline = []
     // underline = document.querySelectorAll(".button-holder button")
