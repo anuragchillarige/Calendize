@@ -1,24 +1,27 @@
 import { deleteDoc, doc } from 'firebase/firestore';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { db } from '../firebase';
 import '../Styles/Event.css'
 
 export default function Event(props) {
+  let delInterval = setInterval(() => { }, 1000)
   const del = async (e) => {
-
+    console.log("in delete method!")
+    clearInterval(delInterval)
     await deleteDoc(
       doc(db, 'users', props.event.user, 'events', props.event.docID)
     );
   };
 
-  useEffect(() => {
-    setInterval(async () => {
-      const today = new Date();
-      if (today > props.event.day) {
-        await del(props.event.docID);
-      }
-    }, 1000)
-  }, [])
+
+  let deleted = false;
+  delInterval = setInterval(async () => {
+    const today = new Date();
+    if (!deleted && today > props.event.end) {
+      await del(props.event.docID);
+      deleted = true
+    }
+  }, 2000)
 
 
   return (

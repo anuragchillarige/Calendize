@@ -16,13 +16,13 @@ import {
 } from "firebase/firestore";
 
 const firebaseConfig = {
-	apiKey: "AIzaSyBoJ9qNhK4N6NwhwCGuLY1bVlpzZEmyMI0",
-	authDomain: "calendar-app-4ccfd.firebaseapp.com",
-	projectId: "calendar-app-4ccfd",
-	storageBucket: "calendar-app-4ccfd.appspot.com",
-	messagingSenderId: "1064061358197",
-	appId: "1:1064061358197:web:fd950c6e54671adb26a83c",
-	measurementId: "G-S0K46V43FB",
+	apiKey: "AIzaSyCGw5MLbVdPEN_ie5FHPnkuDkrxZf25-Fk",
+	authDomain: "calendize-956a9.firebaseapp.com",
+	projectId: "calendize-956a9",
+	storageBucket: "calendize-956a9.appspot.com",
+	messagingSenderId: "994073634703",
+	appId: "1:994073634703:web:36715d7dabd3dbb50b0dfa",
+	measurementId: "G-0VS982MSYM",
 };
 
 const app = initializeApp(firebaseConfig);
@@ -48,7 +48,7 @@ const register = async (name, email, password) => {
 			authProvider: "local",
 			email,
 			location: "None",
-			rssLink: []
+			rssLinks: [],
 		});
 	} catch (err) {
 		console.log(err);

@@ -1,4 +1,4 @@
-import { initializeApp } from "firebase/app";
+import { initializeApp } from 'firebase/app';
 import {
   GoogleAuthProvider,
   getAuth,
@@ -6,7 +6,7 @@ import {
   createUserWithEmailAndPassword,
   sendPasswordResetEmail,
   signOut,
-} from "firebase/auth";
+} from 'firebase/auth';
 
 import {
   getFirestore,
@@ -15,30 +15,28 @@ import {
   collection,
   where,
   addDoc,
-} from "firebase/firestore";
+} from 'firebase/firestore';
 
 const firebaseConfig = {
-  apiKey: "AIzaSyBoJ9qNhK4N6NwhwCGuLY1bVlpzZEmyMI0",
-  authDomain: "calendar-app-4ccfd.firebaseapp.com",
-  projectId: "calendar-app-4ccfd",
-  storageBucket: "calendar-app-4ccfd.appspot.com",
-  messagingSenderId: "1064061358197",
-  appId: "1:1064061358197:web:fd950c6e54671adb26a83c",
-  measurementId: "G-S0K46V43FB"
+  apiKey: 'AIzaSyCGw5MLbVdPEN_ie5FHPnkuDkrxZf25-Fk',
+  authDomain: 'calendize-956a9.firebaseapp.com',
+  projectId: 'calendize-956a9',
+  storageBucket: 'calendize-956a9.appspot.com',
+  messagingSenderId: '994073634703',
+  appId: '1:994073634703:web:36715d7dabd3dbb50b0dfa',
+  measurementId: 'G-0VS982MSYM',
 };
 
 const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
 const db = getFirestore(app);
 
-
-
 const login = async (email, password) => {
   try {
     await signInWithEmailAndPassword(auth, email, password);
   } catch (err) {
     console.error(err);
-    alert("Invalid Email or Password");
+    alert('Invalid Email or Password');
   }
 };
 
@@ -46,14 +44,16 @@ const register = async (name, email, password) => {
   try {
     const res = await createUserWithEmailAndPassword(auth, email, password);
     const user = res.user;
-    await addDoc(collection(db, "users"), {
+    await addDoc(collection(db, 'users'), {
       uid: user.uid,
       name,
-      authProvider: "local",
+      authProvider: 'local',
       email,
     });
   } catch (err) {
-    alert("Make sure all fields are filled in correctly/This email is already in use");
+    alert(
+      'Make sure all fields are filled in correctly/This email is already in use'
+    );
   }
 };
 
@@ -62,7 +62,7 @@ const forgotPassword = async (email) => {
     await sendPasswordResetEmail(auth, email);
     alert("Password reset link sent! Check spam if you don't see it");
   } catch (err) {
-    alert("Invalid Email");
+    alert('Invalid Email');
   }
 };
 
@@ -70,11 +70,4 @@ const logout = () => {
   signOut(auth);
 };
 
-export {
-  auth,
-  db,
-  login,
-  register,
-  forgotPassword,
-  logout,
-};
+export { auth, db, login, register, forgotPassword, logout };

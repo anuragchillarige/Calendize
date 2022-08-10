@@ -1,4 +1,6 @@
 {
+  "name": "calendize",
+  "productName": "Calendize",
   "description": "A foundation for scalable desktop apps",
   "proxy": "127.0.0.1:5000",
   "keywords": [
@@ -122,6 +124,7 @@
     "react-router-dom": "^6.3.0"
   },
   "devDependencies": {
+    "@electron-forge/cli": "^6.0.0-beta.65",
     "@pmmmwh/react-refresh-webpack-plugin": "^0.5.6",
     "@teamsupercell/typings-for-css-modules-loader": "^2.5.1",
     "@testing-library/jest-dom": "^5.16.4",
@@ -148,6 +151,7 @@
     "electron-builder": "^23.0.3",
     "electron-devtools-installer": "^3.2.0",
     "electron-notarize": "^1.2.1",
+    "electron-packager": "^15.5.1",
     "electron-rebuild": "^3.2.7",
     "electronmon": "^2.0.2",
     "eslint": "^8.15.0",
