@@ -36,6 +36,8 @@
   height: 60px;
   transform: translateY(-100px);
   transition: all 0.2s ease;
+  box-shadow: 4px 1px 40px 2px rgb(197, 189, 189);
+  border-radius: 10px;
 }
 
 
@@ -92,7 +94,6 @@
   font-size: 20px;
   color: gray;
   margin-left: 30px;
-  /* border-bottom: 4px solid rgb(121, 25, 159); */
   display: flex;
 }
 

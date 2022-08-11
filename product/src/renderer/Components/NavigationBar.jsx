@@ -7,22 +7,14 @@ import { dir } from 'console';
 function NavigationBar(props) {
   const [navbarOpen, setNavbarOpen] = useState(false);
   const nav = useNavigate();
-  if (props.text != null) {
+  if (props.text !== null) {
     const underline = document.querySelector("." + props.text);
-    underline.style.borderBottom = "4px solid rgb(121, 25, 159)"
+    if (underline !== null)
+      underline.style.borderBottom = "4px solid rgb(121, 25, 159)"
   }
   const navigate = (direction) => {
-    // let underline = []
-    // underline = document.querySelectorAll(".button-holder button")
-    // console.log(underline);
-    // underline.forEach((val) => { if (val !== null) val.style.borderBottom = "none" });
-
-    // let get = document.querySelector("." + direction);
-    // console.log(get)
-    // get.style.borderBottom = "4px solid rgb(121, 25, 159)"
     nav("/" + direction);
     setNavbarOpen(false);
-    // location.reload();
     return;
   }
   return (
