@@ -102,7 +102,6 @@ const Main = () => {
   const changeImage = () => {
     let images = JSON.parse(localStorage.getItem('pictures'));
     if (images === undefined || images === null) return;
-    console.log(index);
     if (index === images.length) index = 0;
     if (index < images.length && imgRef !== undefined)
       imgRef.current?.setAttribute('src', images[index]);

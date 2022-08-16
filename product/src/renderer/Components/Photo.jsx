@@ -8,6 +8,7 @@ function Photo() {
 
     function inputChange(e) {
         const file = e.target.files[0]
+        let added = true;
         if (!file) return;
         getBase64(file).then(base64 => {
             let arr = []
@@ -15,11 +16,17 @@ function Photo() {
                 arr = JSON.parse(localStorage.getItem("pictures"))
             }
             if (arr.includes(base64) === false) arr.push(base64)
-            else (alert("this file has already been added."))
+            else {
+                (alert("this file has already been added."))
+                added = false;
+            }
             localStorage.setItem("pictures", JSON.stringify(arr))
+
+            if (added) {
+                alert("Your image was successfully saved!")
+            }
         })
 
-        e.target.value = null
     }
 
     function getBase64(file) {
@@ -33,20 +40,8 @@ function Photo() {
 
     function deleteImages() {
         localStorage.clear()
-        imgRef.current.setAttribute('src', '')
+        alert("Images successfully cleared.")
     }
-
-    // this goes in app.tsx
-    setInterval(async () => {
-        let images = JSON.parse(localStorage.getItem("pictures"))
-        if (images === undefined || images === null)
-            return
-        console.log(index)
-        if (index === images.length)
-            index = 0;
-        if (index < images.length) imgRef.current.setAttribute('src', images[index])
-        index++
-    }, 1000)
 
     return (
         <>
