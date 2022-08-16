@@ -40,7 +40,7 @@ function NavigationBar(props) {
 
         <div className="close-holder">
           <button className="close" onClick={() => { setNavbarOpen(false) }}>
-            <i class="bi bi-x-lg"></i>
+            <i className="bi bi-x-lg"></i>
           </button>
         </div>
 
