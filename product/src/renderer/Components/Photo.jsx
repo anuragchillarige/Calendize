@@ -3,9 +3,6 @@ import NavigationBar from './NavigationBar';
 import { useState, useRef } from 'react';
 function Photo() {
 
-    const imgRef = useRef();
-    let index = 0
-
     function inputChange(e) {
         const file = e.target.files[0]
         let added = true;
@@ -53,7 +50,6 @@ function Photo() {
                     <button type="submit">Submit</button>
                 </form>
                 <button onClick={() => deleteImages()}>Clear all images</button>
-                <img src="" alt="" className='canvas' ref={imgRef} width={100} />
             </div>
         </>
 
