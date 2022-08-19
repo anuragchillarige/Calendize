@@ -1,34 +1,27 @@
 import { MemoryRouter as Router, Routes, Route } from 'react-router-dom';
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useRef } from 'react';
 import './App.css';
-import "bootstrap-icons/font/bootstrap-icons.css";
+import 'bootstrap-icons/font/bootstrap-icons.css';
 import Weather from './Components/Weather';
 // import Time from './Components/Time';
-import {
-  collection,
-  doc,
-  where,
-  query,
-  onSnapshot,
-  getDocs,
-} from 'firebase/firestore';
+import { collection, where, query, getDocs } from 'firebase/firestore';
 
 import Sign from './Components/SignIn';
 import Register from './Components/Register';
 import Reset from './Components/Reset';
 import EventsHolder from './Components/EventsHolder';
 import NavigationBar from './Components/NavigationBar';
-import { logout, auth, db } from './firebase';
+import { auth, db } from './firebase';
 import { useAuthState } from 'react-firebase-hooks/auth';
-import Ics from './Components/Ics'
+import Ics from './Components/Ics';
+import Photo from './Components/Photo';
 
 import RssLinkHolder from './Components/RssLinkHolder'
 
 const Main = () => {
   // const startTimer = () => (hideElements = setInterval(hideMouse, 3000));
-  const [img, setImg] = useState('');
-  let index = 0;
-  let images: any[] = [];
+  const imgRef = useRef<HTMLImageElement>();
+  let index = 1;
   const [user, setUser] = useState('');
   const [currUser, loading] = useAuthState(auth);
 
@@ -62,21 +55,6 @@ const Main = () => {
       });
 
     }
-
-    images = importAll(
-      require.context('./Images', false, /\.(png|jpe?g|svg)$/)
-    );
-    images = images.splice(0, images.length / 2);
-    setImg(images[0].substring(2));
-  }
-
-  function importAll(r: __WebpackModuleApi.RequireContext) {
-    let images: any[] = [];
-    r.keys().map((item: any) => {
-      images.push(item);
-    });
-
-    return images;
   }
 
   const hideMouse = () => {
@@ -116,45 +94,33 @@ const Main = () => {
     document.onmousemove = getMouseCoords;
   };
 
-  const changeImage = () => {
-    if (index === images.length) {
-      index = 0;
+  useEffect(() => {
+    let images = JSON.parse(localStorage.getItem('pictures'));
+    if (images !== undefined && images !== null) {
+      imgRef.current?.setAttribute('src', images[0]);
     }
+    loadCalendar();
+  }, [currUser, user]);
 
-    if (index < images.length) setImg(images[index].substring(2));
+  const changeImage = () => {
+    let images = JSON.parse(localStorage.getItem('pictures'));
+    if (images === undefined || images === null) return;
+    if (index === images.length) index = 0;
+    if (index < images.length && imgRef !== undefined)
+      imgRef.current?.setAttribute('src', images[index]);
     index++;
   };
 
-  useEffect(() => {
-    loadData();
-  }, [currUser, user]);
-
-
   // let hideElements = setInterval(hideMouse, 3000);
+  // changeImage();
   let chngImg = setInterval(changeImage, 1000 * 10);
 
   return (
     <div className="component-holder">
-      <NavigationBar text={"disp"} />
-      {img !== '' ? (
-        <img
-          className="bg-image"
-          src={require(`./Images/${img}`)}
-          alt=""
-          width={100}
-        />
-      ) : (
-        <></>
-      )}
-      {/* <button
-        className="sign-out-button"
-        onClick={() => {
-          logout();
-          location.reload();
-        }}
-      >
-        Sign Out
-      </button> */}
+      <NavigationBar text={'disp'} />
+
+      <img className="bg-image" src="" alt="" width={100} ref={imgRef} />
+
       <Weather />
       <EventsHolder />
       <RssLinkHolder uid={user} />
@@ -164,7 +130,6 @@ const Main = () => {
 
 export default function App() {
   return (
-
     <Router>
       <Routes>
         <Route path="/" element={<Sign />} />;
@@ -172,6 +137,7 @@ export default function App() {
         <Route path="/register" element={<Register />} />
         <Route path="/reset" element={<Reset />} />
         <Route path="/ics" element={<Ics />} />
+        <Route path="photo" element={<Photo />} />
       </Routes>
     </Router>
   );

@@ -1,9 +1,18 @@
+<<<<<<< HEAD:product/src/renderer/Python/server.py
 from crypt import methods
 from flask import Flask, request, render_template, jsonify
 import Utilities
 import json
 import firebaseUtilities as fb
 import time
+=======
+from flask import Flask, request, render_template
+import Utilities
+import json
+import iCal
+import os
+from os import mkdir, path
+>>>>>>> 2a3ef9ec35917d2654a298e1eda16bc1677fc084:product/assets/Python/server.py
 
 news = []
 uid = []
@@ -49,6 +58,15 @@ def readRssLink():
 def home():
     return render_template('index.html')
 
+@app.route("/test")
+def test():
+    return "testing!"
+
 
 if __name__ == "__main__":
+    try:
+        os.system("mkdir Calendize")
+    except:
+        pass;
+    os.system("cd Calendize; open ElectronReact.app")
     app.run(debug=True)
