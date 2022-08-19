@@ -15,7 +15,7 @@ db = firestore.client()
 
 
 def add_to_db(events, docID):
-    
+
     try:
         for event in events:
             name = str(event['SUMMARY'])
@@ -28,7 +28,6 @@ def add_to_db(events, docID):
 
             day = event['DTSTART'].dt
             end = event['DTEND'].dt
-            print(name + str(day))
 
             data = {
                 "day": day,
@@ -48,6 +47,7 @@ def add_to_db(events, docID):
     except Exception as e:
         print(e)
         return False
+
 
 def read_ical(url, docID):
     today = datetime.now()
@@ -87,7 +87,6 @@ def addCalendars(docID):
     if (doc.exists):
         links = doc.to_dict()['iCalLinks']
         for link in links:
-            print("hi")
             added = add_to_db(link, docID)
             if (added == False):
                 print("err")
@@ -100,6 +99,15 @@ def addCalendars(docID):
 
     for file in icsFiles:
         read_ics(file, docID)
-        
 
     return "<h1> TESTING </h1>"
+
+
+def readRssLinks(docID):
+    docRef = db.collection("users").document(docID)
+    doc = docRef.get()
+
+    links = []
+    if(doc.exists):
+        links = doc.to_dict()['rssLinks']
+    return links

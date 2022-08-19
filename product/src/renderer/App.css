@@ -16,7 +16,7 @@ img.bg-image {
 html,
 body {
   margin: 0px;
-  overflow: hidden;
+  /* overflow: hidden; */
 }
 
 .hideCursor {

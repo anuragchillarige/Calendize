@@ -20,8 +20,9 @@ import EventsHolder from './Components/EventsHolder';
 import NavigationBar from './Components/NavigationBar';
 import { logout, auth, db } from './firebase';
 import { useAuthState } from 'react-firebase-hooks/auth';
-import { json } from 'stream/consumers';
 import Ics from './Components/Ics'
+
+import RssLinkHolder from './Components/RssLinkHolder'
 
 const Main = () => {
   // const startTimer = () => (hideElements = setInterval(hideMouse, 3000));
@@ -51,7 +52,7 @@ const Main = () => {
     }
   }
 
-  async function loadCalendar() {
+  async function loadData() {
     await getUser();
     if (user !== '') {
       fetch('http://127.0.0.1:5000/addCalendar', {
@@ -59,6 +60,7 @@ const Main = () => {
         body: JSON.stringify({ user }),
         mode: 'no-cors',
       });
+
     }
 
     images = importAll(
@@ -124,8 +126,9 @@ const Main = () => {
   };
 
   useEffect(() => {
-    loadCalendar();
+    loadData();
   }, [currUser, user]);
+
 
   // let hideElements = setInterval(hideMouse, 3000);
   let chngImg = setInterval(changeImage, 1000 * 10);
@@ -154,6 +157,7 @@ const Main = () => {
       </button> */}
       <Weather />
       <EventsHolder />
+      <RssLinkHolder uid={user} />
     </div>
   );
 };
