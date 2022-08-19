@@ -26,18 +26,22 @@ def getLink():
     link.append(output["link"])
     return output
 
+
 @app.route('/addCalendar', methods=["POST"])
 def addCalendar():
     output = json.loads(request.data)
     return iCal.addCalendars(output['user'])
 
+
 @app.route('/')
 def home():
     return render_template('index.html')
 
+
 @app.route("/test")
 def test():
     return "testing!"
+
 
 @app.route("/ics", methods=['POST', 'GET'])
 def ics():

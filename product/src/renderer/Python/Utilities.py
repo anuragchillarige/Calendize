@@ -1,19 +1,38 @@
-import feedparser
+from rss_parser import Parser
+from requests import get
+# import requests
+# from bs4 import BeautifulSoup
 
 
 def get_rss_news_data(link):
-    feed = feedparser.parse(link)
-    entry = feed.entries
-    titles = {}
-    num = 0
+    try:
+        titles = []
+        xml = get(link)
 
-    titles["Title"] = feed.feed.title
-    for i in entry:
+        parser = Parser(xml=xml.content)
 
-        if "description" in i and "published" in i:
+        feed = parser.parse()
 
-            titles[str(num)] = {"title": i.title.replace("\"", ""),
-                                "summary": i[u"description"].replace("\"", ""), "date": i.published.replace("\"", "")}
-        num += 1
-
-    return titles
+        num = 0
+        titles.append(feed.title)
+        for i in feed.feed:
+            title = i.title.replace("\"", "")
+            title = title.replace("\'", "")
+            str_title = title.encode("ascii", "ignore")
+            str_1title = str_title.decode()
+            summary = i.description.replace("\"", "")
+            summary = summary.replace("\'", "")
+            str_summary = summary.encode("ascii", "ignore")
+            str_1summary = str_summary.decode()
+            date = i.publish_date.replace("\"", "")
+            date = date.replace("\'", "")
+            str_date = date.encode("ascii", "ignore")
+            str_1date = str_date.decode()
+            # if "description" in i and "published" in i and "title" in i:
+            titles.append[str_1title, str_1summary, str_1date]
+            if(num > 25):
+                break
+            num += 1
+        return titles
+    except Exception as e:
+        print(e)
