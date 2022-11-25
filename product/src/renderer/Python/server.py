@@ -2,7 +2,7 @@ from typing import final
 from werkzeug.utils import secure_filename
 import os
 from copyreg import constructor
-from flask import Flask, request, render_template, url_for, abort
+from flask import Flask, request, render_template, url_for, abort, jsonify
 import Utilities
 import json
 import firebaseUtilities

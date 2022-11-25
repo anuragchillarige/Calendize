@@ -60,7 +60,7 @@ function RssLinkHolder(props) {
 
 
     let index = 0;
-    if (rssData[newsSrc] !== null)
+    if (rssData[newsSrc] !== undefined)
       index = parseInt(Math.random() * (rssData[newsSrc].length - 1)) + 1;
     console.log(newsSrc)
     return [newsSrc, index];
