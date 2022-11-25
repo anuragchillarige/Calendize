@@ -2,7 +2,7 @@ from typing import final
 from werkzeug.utils import secure_filename
 import os
 from copyreg import constructor
-from flask import Flask, request, render_template, url_for, jsonify
+from flask import Flask, request, render_template, url_for, abort
 import Utilities
 import json
 import firebaseUtilities
@@ -58,6 +58,7 @@ def test():
 
 @ app.route("/ics", methods=['POST', 'GET'])
 def ics():
+
     if 'file' not in request.files:
         return ('err', 404)
     file = request.files['file']
