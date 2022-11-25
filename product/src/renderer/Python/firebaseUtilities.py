@@ -101,7 +101,6 @@ def addCalendars(docID):
     if (doc.exists):
         links = doc.to_dict()['iCalLinks']
         for link in links:
-            print("hi")
             added = read_ical(link, docID)
             if (added == False):
                 print("err")

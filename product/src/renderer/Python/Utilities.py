@@ -20,19 +20,23 @@ def get_rss_news_data(link):
             title = title.replace("\'", "")
             str_title = title.encode("ascii", "ignore")
             str_1title = str_title.decode()
+
             summary = i.description.replace("\"", "")
             summary = summary.replace("\'", "")
             str_summary = summary.encode("ascii", "ignore")
             str_1summary = str_summary.decode()
+
             date = i.publish_date.replace("\"", "")
             date = date.replace("\'", "")
             str_date = date.encode("ascii", "ignore")
             str_1date = str_date.decode()
+
             # if "description" in i and "published" in i and "title" in i:
-            titles.append[str_1title, str_1summary, str_1date]
-            if(num > 25):
-                break
+            titles.append([str_1title, str_1summary, str_1date])
             num += 1
+            if(num > 25 or len(feed.feed) < num):
+                break
+
         return titles
     except Exception as e:
         print(e)
