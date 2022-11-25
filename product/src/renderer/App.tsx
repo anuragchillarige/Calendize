@@ -99,7 +99,7 @@ const Main = () => {
     if (images !== undefined && images !== null) {
       imgRef.current?.setAttribute('src', images[0]);
     }
-    loadCalendar();
+    loadData();
   }, [currUser, user]);
 
   const changeImage = () => {

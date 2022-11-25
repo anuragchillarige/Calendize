@@ -1,10 +1,11 @@
+from typing import final
+from werkzeug.utils import secure_filename
+import os
 from copyreg import constructor
-from flask import Flask, request, render_template, url_for
+from flask import Flask, request, render_template, url_for, jsonify
 import Utilities
 import json
-import iCal
-import os
-from werkzeug.utils import secure_filename
+import firebaseUtilities
 
 app = Flask(__name__)
 UPLOADFOLDER = os.path.join(os.getcwd(), './icsFiles')
@@ -30,20 +31,32 @@ def getLink():
 @app.route('/addCalendar', methods=["POST"])
 def addCalendar():
     output = json.loads(request.data)
-    return iCal.addCalendars(output['user'])
+    return firebaseUtilities.addCalendars(output['user'])
 
 
-@app.route('/')
+@app.route('/readRssLinks', methods=["POST", "GET"])
+def readRssLinks():
+    output = json.loads(request.data)
+    links = firebaseUtilities.readRssLinks(output['user'])
+    data = []
+    for i in links:
+        data.append(Utilities.get_rss_news_data(i))
+    response = jsonify(data)
+    response.headers.add('Access-Control-Allow-Origin', '*')
+    return response
+
+
+@ app.route('/')
 def home():
     return render_template('index.html')
 
 
-@app.route("/test")
+@ app.route("/test")
 def test():
     return "testing!"
 
 
-@app.route("/ics", methods=['POST', 'GET'])
+@ app.route("/ics", methods=['POST', 'GET'])
 def ics():
     if 'file' not in request.files:
         return ('err', 404)
