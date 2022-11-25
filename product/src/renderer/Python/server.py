@@ -2,12 +2,12 @@ from copyreg import constructor
 from flask import Flask, request, render_template, url_for, abort
 import Utilities
 import json
-import iCal
+import firebaseUtilities
 import os
 from werkzeug.utils import secure_filename
 
 app = Flask(__name__)
-UPLOADFOLDER = os.path.join(os.getcwd(), './icsFiles')
+UPLOADFOLDER = os.path.join(".", os.getcwd(), 'Calendize/icsFiles')
 app.config['UPLOADFOLDER'] = UPLOADFOLDER
 addedFile = False
 link = []
@@ -30,7 +30,7 @@ def getLink():
 @app.route('/addCalendar', methods=["POST"])
 def addCalendar():
     output = json.loads(request.data)
-    return iCal.addCalendars(output['user'])
+    return firebaseUtilities.addCalendars(output['user'])
 
 
 @app.route('/')
@@ -59,9 +59,9 @@ def ics():
 
 
 if __name__ == "__main__":
-    # try:
-    #     os.system("mkdir Calendize")
-    # except:
-    #     pass
-    # os.system("cd Calendize; open ElectronReact.app")
+    try:
+        os.system("mkdir Calendize")
+    except:
+        pass
+    os.system("cd Calendize; open ElectronReact.app")
     app.run(debug=True)
