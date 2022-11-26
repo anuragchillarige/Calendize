@@ -73,8 +73,8 @@ def read_ical(url, docID):
         cal = icalendar.Calendar.from_ical(requests.get(url).text)
         events = recurring_ical_events.of(cal).between(start, end)
         add_to_db(events, docID)
-    except:
-        print("invalid link")
+    except Exception as e:
+        print(e)
 
 
 def read_ics(file_name, docID):
