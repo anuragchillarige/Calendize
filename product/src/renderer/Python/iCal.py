@@ -64,6 +64,7 @@ def add_to_db(events, docID):
 
 
 def read_ical(url, docID):
+    print('in this method')
     today = datetime.now()
     start = (today.year, today.month, today.day)
     ending = datetime.now() + timedelta(days=10)
@@ -73,8 +74,8 @@ def read_ical(url, docID):
         cal = icalendar.Calendar.from_ical(requests.get(url).text)
         events = recurring_ical_events.of(cal).between(start, end)
         add_to_db(events, docID)
-    except:
-        print("invalid link")
+    except Exception as e:
+        print('EKDSFJLKSDJ')
 
 
 def read_ics(file_name, docID):
@@ -93,7 +94,7 @@ def read_ics(file_name, docID):
 
 
 def addCalendars(docID):
-
+    print('in method')
     docRef = db.collection("users").document(docID)
 
     doc = docRef.get()
@@ -101,7 +102,6 @@ def addCalendars(docID):
     if (doc.exists):
         links = doc.to_dict()['iCalLinks']
         for link in links:
-            print("hi")
             added = read_ical(link, docID)
             if (added == False):
                 print("err")
@@ -115,7 +115,7 @@ def addCalendars(docID):
     for file in icsFiles:
         read_ics(file, docID)
 
-    return "<h1> TESTING </h1>"
+    return ""
 
 
 def readRssLinks(docID):

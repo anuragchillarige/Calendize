@@ -31,7 +31,9 @@ def getLink():
 @app.route('/addCalendar', methods=["POST"])
 def addCalendar():
     output = json.loads(request.data)
-    return firebaseUtilities.addCalendars(output['user'])
+    out =  firebaseUtilities.addCalendars(output['user'])
+    print("hello")
+    return out;
 
 
 @app.route('/readRssLinks', methods=["POST", "GET"])
