@@ -25,7 +25,7 @@ export default function Event(props) {
 
   return (
     <>
-       <div className="event" style={{borderColor:`rgb(${Math.floor(Math.random()*255+30)}, ${Math.floor(Math.random()*255+30)}, ${Math.floor(Math.random()*255+30)})`}} >
+       <div className="event" style={{borderColor:`rgb(${Math.floor(Math.random()*255+35)}, ${Math.floor(Math.random()*255+35)}, ${Math.floor(Math.random()*255+35)})`}} >
         <p>{props.event.name}</p>
         <p>{props.event.details}</p>
         <p>{props.event.start_time}</p>
