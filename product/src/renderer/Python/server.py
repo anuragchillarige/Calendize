@@ -65,6 +65,7 @@ def ics():
         return ('err', 404)
     file = request.files['file']
     if file.filename == '':
+        print('in this')
         return ('', 204)
     if file and file.filename.rsplit('.', 1)[1].lower() == 'ics':
         filename = secure_filename(file.filename)
