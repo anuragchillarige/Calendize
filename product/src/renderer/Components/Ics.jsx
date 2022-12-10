@@ -1,8 +1,7 @@
+
 import React, { useRef } from 'react';
 import NavigationBar from './NavigationBar';
-
 function Ics() {
-
   return (
     <>
       <div style={{ height: "100vh" }}>

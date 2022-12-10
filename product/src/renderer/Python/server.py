@@ -1,13 +1,14 @@
+from typing import final
+from werkzeug.utils import secure_filename
+import os
 from copyreg import constructor
-from flask import Flask, request, render_template, url_for, abort
+from flask import Flask, request, render_template, url_for, abort, jsonify
 import Utilities
 import json
 import firebaseUtilities
-import os
-from werkzeug.utils import secure_filename
 
 app = Flask(__name__)
-UPLOADFOLDER = os.path.join(".", os.getcwd(), 'Calendize/icsFiles')
+UPLOADFOLDER = os.path.join(os.getcwd(), './icsFiles')
 app.config['UPLOADFOLDER'] = UPLOADFOLDER
 addedFile = False
 link = []
@@ -30,20 +31,35 @@ def getLink():
 @app.route('/addCalendar', methods=["POST"])
 def addCalendar():
     output = json.loads(request.data)
-    return firebaseUtilities.addCalendars(output['user'])
+    out =  firebaseUtilities.addCalendars(output['user'])
+    print("hello")
+    return out;
 
 
-@app.route('/')
+@app.route('/readRssLinks', methods=["POST", "GET"])
+def readRssLinks():
+    output = json.loads(request.data)
+    links = firebaseUtilities.readRssLinks(output['user'])
+    data = []
+    for i in links:
+        data.append(Utilities.get_rss_news_data(i))
+    response = jsonify(data)
+    response.headers.add('Access-Control-Allow-Origin', '*')
+    print(response)
+    return response
+
+
+@ app.route('/')
 def home():
     return render_template('index.html')
 
 
-@app.route("/test")
+@ app.route("/test")
 def test():
     return "testing!"
 
 
-@app.route("/ics", methods=['POST', 'GET'])
+@ app.route("/ics", methods=['POST', 'GET'])
 def ics():
 
     if 'file' not in request.files:
@@ -59,9 +75,9 @@ def ics():
 
 
 if __name__ == "__main__":
-    try:
-        os.system("mkdir Calendize")
-    except:
-        pass
-    os.system("cd Calendize; open ElectronReact.app")
+    # try:
+    #     os.system("mkdir Calendize")
+    # except:
+    #     pass
+    # os.system("cd Calendize; open ElectronReact.app")
     app.run(debug=True)
