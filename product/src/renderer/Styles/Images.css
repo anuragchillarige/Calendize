@@ -9,16 +9,21 @@ input[type='file'] {
   display: none;
 }
 
+label i.bi.bi-upload {
+  padding-right: 10px;
+  -webkit-text-stroke: 1.5px;
+}
+
 .file-label {
-  background: linear-gradient(to right, rgb(103, 35, 170), rgb(199, 111, 234));
+  background-color: #8963c6;
   color: white;
   border-radius: 0.6rem;
   display: inline-block;
   text-align: center;
   font-size: 20px;
   padding: 10px 20px;
-  width: 150px;
-  transition: background-image 0.5s cubic-bezier(0.19, 1, 0.22, 1);
+  width: 155px;
+  transition: background-color 0.5s cubic-bezier(0.19, 1, 0.22, 1);
   margin-bottom: 30px;
 }
 
@@ -29,11 +34,7 @@ input[type='file'] {
 
 .file-label:hover {
   cursor: pointer;
-  background-image: linear-gradient(
-    to right,
-    rgb(92, 31, 153),
-    rgb(160, 89, 188)
-  );
+  background-color: #7852b5;
 }
 
 .image-gallery {

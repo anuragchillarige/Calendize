@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import NavigationBar from './NavigationBar';
 import { useState, useRef } from 'react';
 import '../Styles/Images.css'
-
+import { } from 'bootstrap-icons'
 
 function Photo() {
 
@@ -68,7 +68,7 @@ function Photo() {
       <NavigationBar text={"photo"} />
       <form onSubmit={e => { e.preventDefault(); console.log((JSON.parse(localStorage.pictures))) }}>
         <h1> Please upload image files to add to events to your calendar </h1>
-        <label htmlFor="file-input" className='file-label'>Upload Image</label>
+        <label htmlFor="file-input" className='file-label'><i class="bi bi-upload"></i>Upload Image</label>
         <input id="file-input" type="file" accept="image/jpg, image/jpeg, image/svg, image/png" onChange={(e) => inputChange(e)} />
       </form>
       <button className="delete-button" onClick={() => deleteImages()}>Clear all images</button>

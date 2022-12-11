@@ -33,7 +33,7 @@ def add_to_db(events, docID):
     try:
         for event in events:
             name = str(event['SUMMARY'])
-            try:
+            try: 
                 description = str(event['DESCRIPTION'])
                 if (description.__contains__('To see detailed information for automatically created events like this one, use the official Google Calendar app.')):
                     description = ""
@@ -57,7 +57,6 @@ def add_to_db(events, docID):
                 "details": description,
                 "end": end
             }
-
             db.collection("users").document(docID).collection("events").document(
                 f'iCal {name} ON {start} AT {start_time}').set(data)
         return True
@@ -67,7 +66,6 @@ def add_to_db(events, docID):
 
 
 def read_ical(url, docID):
-    print('in this method')
     today = datetime.now()
     start = (today.year, today.month, today.day)
     ending = datetime.now() + timedelta(days=10)
@@ -78,7 +76,7 @@ def read_ical(url, docID):
         events = recurring_ical_events.of(cal).between(start, end)
         add_to_db(events, docID)
     except Exception as e:
-        print('EKDSFJLKSDJ')
+        print(url)
 
 
 def read_ics(file_name, docID):
@@ -97,7 +95,6 @@ def read_ics(file_name, docID):
 
 
 def addCalendars(docID):
-    print('in method')
     docRef = db.collection("users").document(docID)
 
     doc = docRef.get()
