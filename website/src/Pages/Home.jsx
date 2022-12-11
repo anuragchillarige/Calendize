@@ -1,14 +1,21 @@
 import logo from "../calendize-home.png"
 import '../Styles/Home.css'
 import { useNavigate } from 'react-router-dom';
-import { logout } from "../firebase";
+import { useAuthState } from "react-firebase-hooks/auth";
+import { auth, db, logout } from "../firebase";
 import TypeAnimation from 'react-type-animation';
-import React from 'react';
+import React, {useState, useEffect} from 'react';
 
 
 export default function Home() {
     const nav = useNavigate();
+    const [currUser] = useAuthState(auth);
 
+    useEffect( ()=>{
+        if (currUser){
+            nav('/dash')
+        }
+    },[currUser])
 
     return (
         <div className="home">
