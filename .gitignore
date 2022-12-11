@@ -4,6 +4,7 @@
 /node_modules
 front-end/node_modules
 product/node_modules
+product/src/renderer/Python/__pycache__
 /.pnp
 .pnp.js
 
