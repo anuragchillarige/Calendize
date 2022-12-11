@@ -16,7 +16,7 @@ import { useAuthState } from 'react-firebase-hooks/auth';
 import Ics from './Components/Ics';
 import Photo from './Components/Photo';
 
-import RssLinkHolder from './Components/RssLinkHolder'
+import RssLinkHolder from './Components/RssLinkHolder';
 
 const Main = () => {
   // const startTimer = () => (hideElements = setInterval(hideMouse, 3000));
@@ -53,7 +53,6 @@ const Main = () => {
         body: JSON.stringify({ user }),
         mode: 'no-cors',
       });
-
     }
   }
 
@@ -123,7 +122,7 @@ const Main = () => {
 
       <Weather />
       <EventsHolder />
-      <RssLinkHolder uid={user} />
+      {/* <RssLinkHolder uid={user} /> */}
     </div>
   );
 };
