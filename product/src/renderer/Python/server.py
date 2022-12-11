@@ -5,7 +5,7 @@ from copyreg import constructor
 from flask import Flask, request, render_template, url_for, abort, jsonify
 import Utilities
 import json
-import firebaseUtilities
+import iCal
 
 app = Flask(__name__)
 UPLOADFOLDER = os.path.join(os.getcwd(), './icsFiles')
@@ -31,20 +31,20 @@ def getLink():
 @app.route('/addCalendar', methods=["POST"])
 def addCalendar():
     output = json.loads(request.data)
-    out =  firebaseUtilities.addCalendars(output['user'])
-    print("hello")
+    out =  iCal.addCalendars(output['user'])
     return out;
 
 
 @app.route('/readRssLinks', methods=["POST", "GET"])
 def readRssLinks():
     output = json.loads(request.data)
-    links = firebaseUtilities.readRssLinks(output['user'])
+    links = iCal.readRssLinks(output['user'])
     data = []
     for i in links:
         data.append(Utilities.get_rss_news_data(i))
     response = jsonify(data)
     response.headers.add('Access-Control-Allow-Origin', '*')
+    print(response)
     return response
 
 

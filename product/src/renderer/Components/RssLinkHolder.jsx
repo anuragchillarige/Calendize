@@ -35,7 +35,7 @@ function RssLinkHolder(props) {
     if (user !== '') {
       await fetch('http://127.0.0.1:5000/readRssLinks', {
         method: 'POST',
-        body: JSON.stringify({ user }),
+        body: JSON.stringify({ user })
       })
         .then((res) => { res.json().then(data => setRssData(data)).catch((e) => { console.log(e) }) })
         .catch((e) => { console.log(e) })
@@ -62,7 +62,7 @@ function RssLinkHolder(props) {
     let index = 0;
     if (rssData[newsSrc] !== undefined)
       index = parseInt(Math.random() * (rssData[newsSrc].length - 1)) + 1;
-    console.log(newsSrc)
+    console.log(rssData)
     return [newsSrc, index];
   }
 

@@ -14,6 +14,7 @@ import { autoUpdater } from 'electron-updater';
 import log from 'electron-log';
 import MenuBuilder from './menu';
 import { resolveHtmlPath } from './util';
+import { electron } from 'process';
 
 export default class AppUpdater {
   constructor() {
@@ -71,10 +72,9 @@ const createWindow = async () => {
 
   mainWindow = new BrowserWindow({
     show: false,
-    // width: 1280,
-    // height: 830,
     fullscreen: true,
     icon: getAssetPath('logo.incs'),
+    // resizable: false,
     webPreferences: {
       preload: app.isPackaged
         ? path.join(__dirname, 'preload.js')
@@ -94,11 +94,13 @@ const createWindow = async () => {
       mainWindow.minimize();
     } else {
       mainWindow.show();
+      // mainWindow.maximize();
     }
   });
 
   mainWindow.on('closed', () => {
     mainWindow = null;
+    app.quit();
   });
 
   const menuBuilder = new MenuBuilder(mainWindow);

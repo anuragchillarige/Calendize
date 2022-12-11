@@ -57,6 +57,7 @@ def add_to_db(events, docID):
 
             db.collection("users").document(docID).collection("events").document(
                 f'iCal {name} ON {start} AT {start_time}').set(data)
+            print("added to db?")
         return True
     except Exception as e:
         print(e)
@@ -71,6 +72,7 @@ def read_ical(url, docID):
 
     try:
         cal = icalendar.Calendar.from_ical(requests.get(url).text)
+        print("got request")
         events = recurring_ical_events.of(cal).between(start, end)
         add_to_db(events, docID)
     except Exception as e:
