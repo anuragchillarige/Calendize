@@ -19,11 +19,8 @@ export default function Input() {
     const onDateChange = useCallback((dateIn) => {
         setDay(dateIn);
     }, [])
-    const [startTime, setStartTime] = useState('');
-    const [duration, setDuration] = useState({
-        hours: 1,
-        mins: 0
-    });
+    const [startTime, setStartTime] = useState(null);
+    const [endTime, setEndTime] = useState(null);
 
     async function submitData(e) {
         const today = new Date()
@@ -32,69 +29,54 @@ export default function Input() {
         e.preventDefault();
         setName(name.trim());
         setDetails(details.trim());
-        setStartTime(startTime.trim());
+
+        let startDate = new Date(day.toDateString() + ' ' + startTime);
+        let endDate = new Date(day.toDateString() + ' ' + endTime);
+
+        console.log(startDate);
+        console.log(endDate);
 
         let valid = true;
 
-        if (name === '' || !timeCorrect(startTime)) {
+        if (name === '') {
             valid = false;
         }
 
+        if (startTime == null || startTime == undefined || endTime == null || endTime == undefined) {
+            valid = false;
+        }
 
+        if (startDate > endDate) {
+            valid = false;
+        }
+
+        if (startDate < new Date()) {
+            valid = false;
+        }
         if (today > day) {
             valid = false;
         }
 
         if (valid === true) {
-
-            let milTime;
-            if (startTime.indexOf("am") !== -1) {
-                if (parseInt(startTime.substring(0, startTime.indexOf(":"))) === 12) milTime = "00" + startTime.substring(startTime.indexOf(":"), startTime.indexOf(" "));
-                else milTime = parseInt(startTime.substring(0, startTime.indexOf(":"))) < 10 ? "0" + startTime.substring(0, startTime.indexOf("am")) : startTime.substring(0, startTime.indexOf("am"))
-            } else {
-                let hrs = parseInt(startTime.substring(0, startTime.indexOf(":")))
-                if (hrs !== 12) hrs += 12;
-                milTime = hrs + ":" + startTime.substring(startTime.indexOf(":") + 1, startTime.indexOf(" "));
-            }
-
-            let end = today;
-            let nextDay = false;
-            let endTime = (parseInt(milTime.substring(0, milTime.indexOf(":"))) + parseInt(duration.hours)) + ":" +
-                (parseInt(milTime.substring(milTime.indexOf(":") + 1)) + parseInt(duration.mins))
-
-            if (parseInt(endTime.substring(endTime.indexOf(":") + 1)) >= 60) {
-                endTime = (parseInt(endTime.substring(0, endTime.indexOf(":"))) + 1) + ":" + (parseInt(endTime.substring(endTime.indexOf(":") + 1)) - 60)
-            }
-
-            if (parseInt(endTime.substring(0, endTime.indexOf(":"))) >= 24) {
-                endTime = (parseInt(endTime.substring(0, endTime.indexOf(":"))) - 24) + ":" + endTime.substring(endTime.indexOf(":") + 1)
-                nextDay = true;
-            }
-
-            console.log(endTime)
-
-            if (nextDay) {
-                end.setDate(end.getDate() + 1);
-            }
-
-            end.setHours(parseInt(endTime.substring(0, endTime.indexOf(":"))))
-            end.setMinutes(parseInt(endTime.substring(endTime.indexOf(":") + 1)))
-            end.setSeconds(0)
-
-            console.log(end)
-
             // submit form 
+
+            let durationMins = (endDate.getTime() - startDate.getTime()) / (1000 * 60);
+            let durationHrs = Math.floor(durationMins / 60);
+            durationMins %= 60;
+
+            let duration = {
+                hours: durationHrs,
+                mins: durationMins
+            }
             const eventObject = {
                 name: name,
                 details: details,
                 day: day,
-                start_time: milTime,
+                start_time: startTime,
+                end_time: endTime,
                 duration: duration,
-                end: end
+                end: endDate
             }
-
-            eventObject.day.setHours(milTime.substring(0, milTime.indexOf(":")).trim())
-            eventObject.day.setMinutes(milTime.substring(milTime.indexOf(":") + 1).trim())
 
             try {
                 const q = query(
@@ -115,6 +97,7 @@ export default function Input() {
                 return;
             }
 
+
             const invalid = document.querySelector(".invalidData");
             invalid.style.display = 'none';
 
@@ -124,90 +107,19 @@ export default function Input() {
                 nameElement.style.border = '2px solid red'
             }
 
-            if (!timeCorrect(startTime)) {
-                const timeElement = document.querySelector('#startTime')
-                timeElement.style.border = '2px solid red'
-            }
-
             if (today > day) {
                 const dateElement = document.querySelector(".datePicker")
                 dateElement.style.border = '2px solid red'
             }
 
+            if (startDate > endDate || startDate < new Date()) {
+                const startElement = document.querySelector("#startTime");
+                startElement.style.border = '2px solid red';
+            }
+
             const invalid = document.querySelector(".invalidData");
             invalid.style.display = 'block';
         }
-
-    }
-
-    function isNumber(num) {
-        const nums = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9']
-
-        for (let i = 0; i < num.length; i++) {
-            let valid = false;
-            for (let j = 0; j < nums.length; j++) {
-                if (num.substring(i, i + 1) === nums[j]) {
-                    valid = true;
-                }
-            }
-            if (valid === false) return false;
-        }
-
-        return true;
-    }
-
-    function timeCorrect(time) {
-
-        time = time.toLowerCase().trim();
-        if (time.indexOf("am") === -1 && time.indexOf("pm") === -1) {
-            return false;
-        }
-        else {
-            if (time.indexOf("am") !== -1) {
-                if (time.substring(time.indexOf("am")).length !== 2)
-                    return false;
-            } else {
-                if (time.substring(time.indexOf("pm")).length !== 2)
-                    return false;
-            }
-        }
-
-
-        if (time.indexOf(":") === -1) {
-            return false;
-        }
-
-        if (time.indexOf(" ") === -1) {
-            return false;
-        }
-
-        if (time.indexOf(" ") < time.indexOf(":")) {
-            return false;
-        }
-
-        if (time.substring(0, time.indexOf(":")).length < 1 || time.substring(0, time.indexOf(":")).length > 2) {
-            return false;
-        }
-
-        if (time.substring(time.indexOf(":") + 1, time.indexOf(" ")).length > 2 || time.substring(time.indexOf(":") + 1, time.indexOf(" ")).length < 1) {
-            return false;
-        }
-
-        if (!isNumber(time.substring(0, time.indexOf(":"))) || !isNumber(time.substring(time.indexOf(":") + 1, time.indexOf(" ")))) {
-            return false;
-        }
-
-        let hr = parseInt(time.substring(0, time.indexOf(":")));
-        let min = parseInt(time.substring(time.indexOf(":") + 1, time.indexOf(" ")));
-
-        if (isNaN(hr) || isNaN(min)) {
-            return false;
-        }
-
-        if (hr > 12 || hr <= 0) return false;
-        if (min > 60 || min < 0) return false;
-
-        return true;
     }
 
     function setDefaultBorder(e) {
@@ -234,14 +146,12 @@ export default function Input() {
                 </div>
 
                 <div className="event timings">
-                    <input type="text" onChange={e => { e.preventDefault(); setStartTime(e.target.value); setDefaultBorder(e) }} className="event time" id="startTime" placeholder="Time (hh:mm am/pm)" />
-                    <label htmlFor="duration">Duration:</label>
-                    <div className="event duration">
-                        <input name="duration" type="number" id="duration-hours" min="0" placeholder="Hours"
-                            onChange={e => { e.preventDefault(); setDuration({ hours: e.target.value, mins: duration.mins }) }} />
-                        <input type="number" id="duration-minutes" min="0" max="59" placeholder="Minutes"
-                            onChange={e => { e.preventDefault(); setDuration({ hours: duration.hours, mins: e.target.value }) }} />
-                    </div>
+                    <label htmlFor="start-time">Start time:</label>
+                    <input type="time" name="start-time" onChange={e => { e.preventDefault(); setStartTime(e.target.value); setDefaultBorder(e) }}
+                        className="event time" id="startTime" />
+                    <label htmlFor="end-time">End time:</label>
+                    <input name="end-time" type="time" id="end-time" min="0" placeholder="Hours"
+                        onChange={e => { e.preventDefault(); setEndTime(e.target.value); setDefaultBorder(e) }} />
                 </div>
 
                 <button className="submitButton" type="submit">Add</button>

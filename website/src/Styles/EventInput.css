@@ -12,8 +12,6 @@
 	padding-left: 210px;
 }
 
-
-
 .event-holder-box {
 	box-shadow: 4px 1px 40px 2px rgb(197, 189, 189);
 	padding-top: 20px;
@@ -44,15 +42,16 @@
 	margin-top: 30px;
 	margin-right: 10px;
 	margin-left: 20px;
+	color: black;
 }
 
 .event.timings #startTime {
 	border-radius: 10px;
 	margin-top: 20px;
-	width: 145px;
+	/* width: 145px; */
 }
 
-.event.duration {
+.event.endTime {
 	margin-top: 20px;
 	display: flex;
 	flex-direction: row;
@@ -60,13 +59,13 @@
 	justify-content: space-between;
 }
 
-.event.duration input::-webkit-outer-spin-button,
+.event.endTime input::-webkit-outer-spin-button,
 input::-webkit-inner-spin-button {
 	-webkit-appearance: none;
 	margin: 0;
 }
 
-.event.duration input[type="number"] {
+.event.endTime input[type="number"] {
 	-moz-appearance: textfield;
 }
 
@@ -78,7 +77,7 @@ input::-webkit-inner-spin-button {
 	border-radius: 10px;
 }
 
-.event.duration #duration-hours {
+.event.entTime #end-time-hours {
 	margin-top: 0px;
 	width: 45px;
 	border-radius: 10px;
@@ -88,7 +87,6 @@ input::-webkit-inner-spin-button {
 .react-datepicker {
 	border: none;
 }
-
 
 .react-datepicker__popper {
 	border: none;
@@ -108,7 +106,6 @@ input::-webkit-inner-spin-button {
 .react-datepicker__day {
 	color: white;
 } */
-
 
 .react-datepicker__day:hover {
 	background: rgb(61, 60, 60);
@@ -144,7 +141,11 @@ input::-webkit-inner-spin-button {
 	border: none;
 	border-radius: 10px;
 	height: 45px;
-	background: linear-gradient(to right, rgb(103, 35, 170), rgb(199, 111, 234));
+	background: linear-gradient(
+		to right,
+		rgb(103, 35, 170),
+		rgb(199, 111, 234)
+	);
 	color: white;
 	margin-left: 100px;
 	cursor: pointer;
