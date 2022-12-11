@@ -33,9 +33,12 @@ def add_to_db(events, docID):
     try:
         for event in events:
             name = str(event['SUMMARY'])
-            description = str(event['DESCRIPTION'])
-            if (description.__contains__('To see detailed information for automatically created events like this one, use the official Google Calendar app.')):
-                description = ""
+            try:
+                description = str(event['DESCRIPTION'])
+                if (description.__contains__('To see detailed information for automatically created events like this one, use the official Google Calendar app.')):
+                    description = ""
+            except:
+                description = ''
             start = event['DTSTART'].dt
             start_time = start.strftime("%H:%M")
             duration = str(event['DTEND'].dt - start)
