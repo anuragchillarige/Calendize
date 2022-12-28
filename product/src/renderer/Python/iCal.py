@@ -49,10 +49,9 @@ def add_to_db(events, docID):
             data = {
                 "day": day,
                 "duration": {
-                    "hours": duration[0: duration.index(":")],
-                    "mins": duration[duration.index(":") + 1: duration.rindex(":")]
+                    "hours": int(duration[0: duration.index(":")]),
+                    "mins": int(duration[duration.index(":") + 1: duration.rindex(":")])
                 },
-                "start_time": start_time,
                 "name": name,
                 "details": description,
                 "end": end
@@ -61,7 +60,7 @@ def add_to_db(events, docID):
                 f'iCal {name} ON {start} AT {start_time}').set(data)
         return True
     except Exception as e:
-        print(e)
+        print(e + ' dsifjsdkl')
         return False
 
 

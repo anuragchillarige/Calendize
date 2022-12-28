@@ -64,6 +64,8 @@ export default function Input() {
             let durationHrs = Math.floor(durationMins / 60);
             durationMins %= 60;
 
+            let theDay = new Date(day.toDateString() + ' ' + startTime)
+
             let duration = {
                 hours: durationHrs,
                 mins: durationMins
@@ -71,9 +73,7 @@ export default function Input() {
             const eventObject = {
                 name: name,
                 details: details,
-                day: day,
-                start_time: startTime,
-                end_time: endTime,
+                day: theDay,
                 duration: duration,
                 end: endDate
             }

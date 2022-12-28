@@ -34,15 +34,15 @@ export default function EventsHolder() {
         const usr = async () => {
             await getUser();
 
-
             if (user !== '') {
-                const q = query(collection(db, 'users', user, 'events'), orderBy("day"), orderBy("start_time"))
+                const q = query(collection(db, 'users', user, 'events'), orderBy("day"))
                 const unsub = onSnapshot(q, (querySnapshot) => {
                     let eventsArr = []
                     querySnapshot.forEach(async (event) => {
                         let data = event.data();
-
-                        eventsArr.push({ user: user, name: data.name, details: data.details, day: data.day.toDate(), start_time: data.start_time, duration: data.duration, docID: event.id, end: data.end.toDate() })
+                        let time = data.day.toDate().toLocaleTimeString()
+                        let timeStr = time.substring(0, time.lastIndexOf(':')) + time.substring(time.lastIndexOf(' '))
+                        eventsArr.push({ user: user, name: data.name, details: data.details, day: data.day.toDate(), start_time: timeStr, duration: data.duration, docID: event.id, end: data.end.toDate() })
 
                     })
                     setEvents(eventsArr)
