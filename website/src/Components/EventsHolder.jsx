@@ -60,7 +60,7 @@ export default function EventsHolder() {
         <div >
             <div id="subhousing">
                 <label className="headers">
-                    Upcoming Events
+                    
                 </label>
                 <div className="inside">
                     {events.map((event, index) => <Event className="event" event={event} props={event} id={event.docID} key={index} />)}

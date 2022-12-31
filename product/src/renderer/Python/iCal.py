@@ -109,6 +109,7 @@ def addCalendars(docID):
     icsFiles = []
     for file in filenames:
         if file[file.rindex("."):] == '.ics':
+            print(file)
             icsFiles.append("Calendize/icsFiles/" + file)
 
     for file in icsFiles:
