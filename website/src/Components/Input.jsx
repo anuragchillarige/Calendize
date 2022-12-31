@@ -30,6 +30,7 @@ export default function Input() {
         setName(name.trim());
         setDetails(details.trim());
 
+
         let startDate = new Date(day.toDateString() + ' ' + startTime);
         let endDate = new Date(day.toDateString() + ' ' + endTime);
 
